@@ -32,7 +32,8 @@ jobs:
         project_id: ${{ secrets.gcp_api_temp_dev_project_id }}
     
     - run: gcloud auth list
-    - run: gcloud config set account 15400162913-compute@developer.gserviceaccount.com
+    #- run: gcloud config set account 15400162913-compute@developer.gserviceaccount.com
+    - run: gcloud config set account `ACCOUNT`
     
     - name: deploy
       uses: google-github-actions/deploy-appengine@main
