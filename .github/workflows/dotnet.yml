@@ -24,6 +24,12 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     
+    # Setup gcloud CLI
+    - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      with:
+        version: "290.0.1"
+        service_account_key: ${{ secrets.gcp_api_temp_dev_credentials }}
+        project_id: ${{ secrets.gcp_api_temp_dev_project_id }}
     
     - name: deploy
       uses: google-github-actions/deploy-appengine@main
