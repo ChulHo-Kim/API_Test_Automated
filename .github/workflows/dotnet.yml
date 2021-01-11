@@ -31,14 +31,15 @@ jobs:
         service_account_key: ${{ secrets.gcp_api_temp_dev_credentials }}
         project_id: ${{ secrets.gcp_api_temp_dev_project_id }}
     
-    - run: gcloud auth list
+    #- run: gcloud auth list
     #- run: gcloud config set account 15400162913-compute@developer.gserviceaccount.com
-    - run: gcloud config set account `ACCOUNT`
+    #- run: gcloud config set account `ACCOUNT`
     
     - name: deploy
       uses: google-github-actions/deploy-appengine@main
       with:
         project_id: ${{ secrets.gcp_api_temp_dev_project_id }}
+        deliverables: https://raw.githubusercontent.com/tangungithub/API_Test_Automated/main/.github/workflows/app.yml
         credentials: ${{ secrets.gcp_api_temp_dev_credentials }}
     # Example of using the output
     - name: test
