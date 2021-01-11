@@ -23,3 +23,13 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+    
+    
+    - name: deploy
+      uses: google-github-actions/deploy-appengine@main
+      with:
+        project_id: ${{ secrets.gcp_api_temp_dev_project_id }}
+        credentials: ${{ secrets.gcp_api_temp_dev_credentials }}
+    # Example of using the output
+    - name: test
+      run: curl "${{ steps.deploy.outputs.url }}"
