@@ -27,9 +27,10 @@ jobs:
     # Setup gcloud CLI
     - uses: google-github-actions/setup-gcloud@master
       with:
-        version: "290.0.1"
+        version: "320.0.1"
         service_account_key: ${{ secrets.gcp_api_temp_dev_credentials }}
         project_id: ${{ secrets.gcp_api_temp_dev_project_id }}
+        export_default_credentials: true
     
     #- run: gcloud auth list
     #- run: gcloud config set account 15400162913-compute@developer.gserviceaccount.com
