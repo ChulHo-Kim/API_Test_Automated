@@ -35,11 +35,19 @@ jobs:
     #- run: gcloud config set account 15400162913-compute@developer.gserviceaccount.com
     #- run: gcloud config set account `ACCOUNT`
     
+    - name: List out directory contents
+      run: |
+          echo "Listing the contents of the GitHub workspace directory"
+          ls ${{ github.workspace }}
+          echo "Recursively listing all contents of the current directory"
+          ls -R
+      
     - name: deploy
       uses: google-github-actions/deploy-appengine@main
       with:
         project_id: ${{ secrets.gcp_api_temp_dev_project_id }}
-        deliverables: https://raw.githubusercontent.com/tangungithub/API_Test_Automated/main/.github/workflows/app.yml
+        #deliverables: https://raw.githubusercontent.com/tangungithub/API_Test_Automated/main/.github/workflows/app.yml
+        deliverables: ./app.yml
         credentials: ${{ secrets.gcp_api_temp_dev_credentials }}
     # Example of using the output
     - name: test
