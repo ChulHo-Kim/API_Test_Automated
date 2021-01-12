@@ -63,7 +63,7 @@ jobs:
         username: ${{ secrets.ServerUsername }}
         password: ${{ secrets.ServerPassword }}
         port: ${{ secrets.ServerPort }}
-        source: "./bin/Release/netcoreapp3.1/WebAPI_template.dll,"
+        source: "./bin/Release/netcoreapp3.1/WebAPI_template.dll"
         target: "inetpub"
     
     - name: copy folder via ssh password
