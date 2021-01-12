@@ -53,7 +53,7 @@ jobs:
     #- run: cd API_Test_Automated
     #- run: dotnet restore
     #- run: dotnet publish -c Release
-    - run: cd ./bin/Release/netcoreapp2.1/publish
+    #- run: cd ./bin/Release/netcoreapp2.1/publish
     - run: gcloud app deploy #.\bin\Release\netcoreapp2.1\publish\app.yaml
     
     #- name: copy file via ssh password
