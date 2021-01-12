@@ -64,7 +64,7 @@ jobs:
         password: ${{ secrets.ServerPassword }}
         port: ${{ secrets.ServerPort }}
         source: "./bin/Release/netcoreapp3.1/WebAPI_template.dll"
-        target: "inetpub"
+        target: "C:\inetpub\"
     
     - name: copy folder via ssh password
       uses: appleboy/scp-action@master
