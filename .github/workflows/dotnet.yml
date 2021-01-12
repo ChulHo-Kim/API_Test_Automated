@@ -17,72 +17,19 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
-    #- name: Restore dependencies
-    #  run: dotnet restore
-    #- name: Build
-    #  run: dotnet build --no-restore
-    #- name: Test
-    #  run: dotnet test --no-build --verbosity normal
-    
+     
     - name: Build with dotnet
       run: dotnet build --configuration Release
     - name: dotnet publish
       run: |
         dotnet publish -c Release -o WebAPI_template
     
-    # Setup gcloud CLI
-    #- uses: google-github-actions/setup-gcloud@master
-    #  with:
-    #    #version: "320.0.1"
-    #    service_account_key: ${{ secrets.gcp_api_temp_dev_credentials }}
-    #    project_id: ${{ secrets.gcp_api_temp_dev_project_id }}
-    #    export_default_credentials: true
-    
-    #- run: gcloud auth list
-    #- run: gcloud config set account 15400162913-compute@developer.gserviceaccount.com
-    #- run: gcloud config set account `ACCOUNT`
-    
-    #- name: List out directory contents
-    #  run: |
-    #      echo "Listing the contents of the GitHub workspace directory"
-    #      ls ${{ github.workspace }}
-    #      echo "Recursively listing all contents of the current directory"
-    #      ls -R
-    
-    #- run: git clone https://github.com/tangungithub/API_Test_Automated
-    #- run: cd API_Test_Automated
-    #- run: dotnet restore
-    #- run: dotnet publish -c Release
-    #- run: cd ./bin/Release/netcoreapp2.1/publish
-    #- run: gcloud app deploy #.\bin\Release\netcoreapp2.1\publish\app.yaml
-    
-    - name: copy dll file via ssh password
-      uses: appleboy/scp-action@master
+    - name: local remote scp
+      uses: cross-the-world/scp-pipeline@master
       with:
         host: ${{ secrets.ServerHost }}
-        username: ${{ secrets.ServerUsername }}
-        password: ${{ secrets.ServerPassword }}
-        port: ${{ secrets.ServerPort }}
-        source: "bin/Release/netcoreapp3.1/WebAPI_template.dll"
-        target: "inetpub3"
+        user: ${{ secrets.ServerUsername }}
+        pass: ${{ secrets.ServerPassword }}
+        local: "bin/Release/netcoreapp3.1/WebAPI_template.dll"
+        remote: c:\inetpub3\
     
-   # - name: copy folder via ssh password
-   #   uses: appleboy/scp-action@master
-   #   with:
-   #     host: ${{ secrets.ServerHost }}
-   #     username: ${{ secrets.ServerUsername }}
-   #     password: ${{ secrets.ServerPassword }}
-   #     port: ${{ secrets.ServerPort }}
-   #     source: "./WebAPI_template/"
-   #     target: "inetpub"
-   #   
-    #- name: deploy
-    #  uses: google-github-actions/deploy-appengine@main
-    #  with:
-    #    project_id: ${{ secrets.gcp_api_temp_dev_project_id }}
-        #deliverables: https://raw.githubusercontent.com/tangungithub/API_Test_Automated/main/.github/workflows/app.yml
-    #    deliverables: ./app.yml
-    #    credentials: ${{ secrets.gcp_api_temp_dev_credentials }}
-    # Example of using the output
-    #- name: test
-    #  run: curl "${{ steps.deploy.outputs.url }}"
