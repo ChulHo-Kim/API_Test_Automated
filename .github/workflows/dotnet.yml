@@ -56,25 +56,30 @@ jobs:
     #- run: cd ./bin/Release/netcoreapp2.1/publish
     #- run: gcloud app deploy #.\bin\Release\netcoreapp2.1\publish\app.yaml
     
-    - name: copy dll file via ssh password
-      uses: appleboy/scp-action@master
-      with:
-        host: ${{ secrets.ServerHost }}
-        username: ${{ secrets.ServerUsername }}
-        password: ${{ secrets.ServerPassword }}
-        port: ${{ secrets.ServerPort }}
-        source: "./bin/Release/netcoreapp3.1/WebAPI_template.dll"
-        target: "inetpub"
+    - name: path
+      run: pwd
+    - name: dic
+      run: ls -al
     
-    - name: copy folder via ssh password
-      uses: appleboy/scp-action@master
-      with:
-        host: ${{ secrets.ServerHost }}
-        username: ${{ secrets.ServerUsername }}
-        password: ${{ secrets.ServerPassword }}
-        port: ${{ secrets.ServerPort }}
-        source: "./WebAPI_template/"
-        target: "inetpub"
+    # - name: copy dll file via ssh password
+    #  uses: appleboy/scp-action@master
+    #  with:
+    #    host: ${{ secrets.ServerHost }}
+    #    username: ${{ secrets.ServerUsername }}
+    #    password: ${{ secrets.ServerPassword }}
+    #    port: ${{ secrets.ServerPort }}
+    #    source: "./bin/Release/netcoreapp3.1/WebAPI_template.dll"
+    #    target: "inetpub"
+    
+    #- name: copy folder via ssh password
+    #  uses: appleboy/scp-action@master
+    #  with:
+    #    host: ${{ secrets.ServerHost }}
+    #    username: ${{ secrets.ServerUsername }}
+    #    password: ${{ secrets.ServerPassword }}
+    #    port: ${{ secrets.ServerPort }}
+    #    source: "./WebAPI_template/"
+    #    target: "inetpub"
       
     #- name: deploy
     #  uses: google-github-actions/deploy-appengine@main
