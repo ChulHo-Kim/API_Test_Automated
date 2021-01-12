@@ -48,14 +48,24 @@ jobs:
     #      ls ${{ github.workspace }}
     #      echo "Recursively listing all contents of the current directory"
     #      ls -R
-      
-    - name: deploy
-      uses: google-github-actions/deploy-appengine@main
+    
+    - name: copy file via ssh password
+      uses: appleboy/scp-action@master
       with:
-        project_id: ${{ secrets.gcp_api_temp_dev_project_id }}
-        #deliverables: https://raw.githubusercontent.com/tangungithub/API_Test_Automated/main/.github/workflows/app.yml
-        deliverables: ./app.yml
-        credentials: ${{ secrets.gcp_api_temp_dev_credentials }}
+        host: ${{ secrets.ServerHost }}
+        username: ${{ secrets.ServerUsername }}
+        password: ${{ secrets.ServerPassword }}
+        port: ${{ secrets.ServerPort }}
+        source: "./bin/Release/netcoreapp3.1/WebAPI_template.dll,./WebAPI_template/"
+        target: "inetpub"
+      
+    #- name: deploy
+    #  uses: google-github-actions/deploy-appengine@main
+    #  with:
+    #    project_id: ${{ secrets.gcp_api_temp_dev_project_id }}
+    #    #deliverables: https://raw.githubusercontent.com/tangungithub/API_Test_Automated/main/.github/workflows/app.yml
+    #    deliverables: ./app.yml
+    #    credentials: ${{ secrets.gcp_api_temp_dev_credentials }}
     # Example of using the output
-    - name: test
-      run: curl "${{ steps.deploy.outputs.url }}"
+    #- name: test
+    #  run: curl "${{ steps.deploy.outputs.url }}"
